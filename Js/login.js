@@ -12,7 +12,9 @@ function getLogin(event){
     const usuario = usuarioLogin.value;
     const contraseña = contraseñaLogin.value;
     if (usuario === USER && contraseña === PASSWORD){
-        window.location.href = "#";
+        localStorage.setItem("isLogged", "true");
+        localStorage.setItem("user", USER);
+        window.location.href = "./assets/templates/main.html";
         } 
     else {
         error.textContent="Usuario o contraseña incorrecta"
