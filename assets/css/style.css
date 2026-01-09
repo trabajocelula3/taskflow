@@ -1,3 +1,12 @@
-body{
+
+.low {
+    border: 2px solid rgb(36, 110, 6);
     
 }
+.medium {
+    border: 2px solid rgb(207, 204, 5);
+}
+.high {
+    border: 2px solid rgb(250, 0, 0);
+}
+
