@@ -1,12 +1,12 @@
 
 .low {
-    border: 2px solid rgb(36, 110, 6);
+    border: 2px solid rgb(177, 230, 156);
     
 }
 .medium {
-    border: 2px solid rgb(207, 204, 5);
+    border: 2px solid rgb(255, 251, 0);
 }
 .high {
-    border: 2px solid rgb(250, 0, 0);
+    border: 2px solid rgb(255, 133, 133);
 }
 
