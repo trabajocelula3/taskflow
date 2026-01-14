@@ -1,14 +1,14 @@
 const btn = document.getElementById("add");
 const formContainer = document.getElementById("register");
 const containerLisTask = document.getElementById("containerTask");
-const isLogged = localStorage.getItem("isLogged") ; 
 let listTask = []; 
 let currentFilter = "all";
 
 
 const filterBar = document.getElementById("filterBar"); 
+const isLogged = localStorage.getItem("isLogged") ; 
 
-if (!isLogged) {
+if (isLogged !== true) {
     window.location.href = "../../index.html"
 }
 filterBar.addEventListener("click", (e) => {
