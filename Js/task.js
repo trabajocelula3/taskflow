@@ -6,8 +6,9 @@ let listTask = [];
 let currentFilter = "all";
 
 
+const filterBar = document.getElementById("filterBar"); 
 
-document.getElementById("filterBar").addEventListener("click", (e) => {
+filterBar.addEventListener("click", (e) => {
     if (e.target.classList.contains("filter-btn")) {
         currentFilter = e.target.dataset.status;
         showCards();
