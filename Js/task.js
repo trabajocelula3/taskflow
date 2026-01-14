@@ -8,7 +8,7 @@ let currentFilter = "all";
 const filterBar = document.getElementById("filterBar"); 
 const isLogged = localStorage.getItem("isLogged") ; 
 
-if (isLogged !== true) {
+if (isLogged !== "true") {
     window.location.href = "../../index.html"
 }
 filterBar.addEventListener("click", (e) => {
