@@ -1,13 +1,16 @@
 const btn = document.getElementById("add");
 const formContainer = document.getElementById("register");
 const containerLisTask = document.getElementById("containerTask");
-
-let listTask = [];
+const isLogged = localStorage.getItem("isLogged") ; 
+let listTask = []; 
 let currentFilter = "all";
 
 
 const filterBar = document.getElementById("filterBar"); 
 
+if (!isLogged) {
+    window.location.href = "../../index.html"
+}
 filterBar.addEventListener("click", (e) => {
     if (e.target.classList.contains("filter-btn")) {
         currentFilter = e.target.dataset.status;
