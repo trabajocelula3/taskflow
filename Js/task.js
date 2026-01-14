@@ -1,15 +1,17 @@
 const btn = document.getElementById("add");
 const formContainer = document.getElementById("register");
 const containerLisTask = document.getElementById("containerTask");
-let listTask = []; 
+let listTask = JSON.parse(localStorage.getItem("listTask")) || []; 
 let currentFilter = "all";
-
 
 const filterBar = document.getElementById("filterBar"); 
 const isLogged = localStorage.getItem("isLogged") ; 
 
 if (isLogged !== "true") {
     window.location.href = "../../index.html"
+}
+if (listTask) {
+    showCards()
 }
 filterBar.addEventListener("click", (e) => {
     if (e.target.classList.contains("filter-btn")) {
@@ -32,7 +34,7 @@ function createForm(e) {
     }
 
     const form = document.createElement("form");
-    form.className = "card p-3 mt-3 d-flex flex-column gap-3";
+    form.className = "card p-3 mt-4 d-flex flex-column gap-3";
 
     form.innerHTML = `
         <h5 class="text-center">Create a new task</h5>
@@ -61,28 +63,30 @@ function createId() {
 }
 
 function createTask(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const taskName = e.target.taskName.value.trim();
-    const description = e.target.description.value.trim();
-    const priority = e.target.priority.value;
+  const taskName = e.target.taskName.value.trim();
+  const description = e.target.description.value.trim();
+  const priority = e.target.priority.value;
 
-    if (!taskName || !description || priority === "select") {
-        alert("Complete all fields");
-        return;
-    }
+  if (!taskName || !description || priority === "select") {
+    alert("Complete all fields");
+    return;
+  }
 
-    const task = {
-        id: createId(),
-        nombre: taskName,
-        description,
-        priority,
-        status: "pending"
-    };
+  const task = {
+    id: createId(),
+    nombre: taskName,
+    description,
+    priority,
+    status: "pending"
+  };
 
-    listTask.push(task);
-    e.target.remove();
-    showCards();
+
+  listTask.push(task);
+  localStorage.setItem("listTask", JSON.stringify(listTask));
+  e.target.remove();
+  showCards();
 }
 
 
@@ -105,7 +109,6 @@ function showCards() {
             <div class="card p-3 w-25 shadow ${task.priority} ${task.status}">
 
                 <h5 class="text-center">${task.nombre}</h5>
-                <p class="text-center">ID: ${task.id}</p>
                 <p class="text-center">${task.description}</p>
                 <p class="text-center">Priority: ${task.priority}</p>
                 <p class="text-center fw-bold">${task.status}</p>
@@ -142,6 +145,7 @@ containerLisTask.addEventListener("click", (e) => {
 function deleteTask(id) {
     if (!confirm("Delete this task?")) return;
     listTask = listTask.filter(task => task.id !== id);
+    localStorage.setItem("listTask", JSON.stringify(listTask));
     showCards();
 }
 
@@ -153,5 +157,8 @@ function updateStatus(id) {
         task.status = "process" 
     } else if (task.status === "process") {
          task.status = "finish" 
-        } showCards(); 
+        
+        } 
+    showCards(); 
+    localStorage.setItem("listTask", JSON.stringify(listTask));
     }
